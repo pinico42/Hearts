@@ -1,0 +1,19 @@
+﻿doctype html
+html
+  head
+    title
+    script(src='/javascripts/debug.js')
+  body
+    button(onclick='newGame()') New game
+    button(onclick='joinGame()') Join game
+    button(onclick='startGame()') Start game
+    button(onclick='setHandaround()') Set handaround
+    button(onclick='setHandaroundThree()') Handaround first 3
+    button(onclick='playCard()') Play card
+    button(onclick='playFirstCard()') Play first card
+    button(onclick='requestUpdate()') Request update
+
+    p(style='font-size: 4em' id='cards')
+    h3(id='message')
+    
+    p(style='font-size: 4em' id='table')

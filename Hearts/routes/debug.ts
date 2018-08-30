@@ -1,11 +1,11 @@
 ﻿/*
- * GET users listing.
+ * GET debug page.
  */
 import express = require('express');
 const router = express.Router();
 
 router.get('/', (req: express.Request, res: express.Response) => {
-    res.send("respond with a resource");
+    res.render('debug', { title: 'Debuggity' });
 });
 
 export default router;
