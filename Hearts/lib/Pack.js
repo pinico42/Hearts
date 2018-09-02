@@ -5,16 +5,16 @@ const Hand_1 = require("./Hand");
 class Pack {
     constructor() {
         this.cards = [];
-        /*for (var i = 0; i < 13; i++) {
+        for (var i = 0; i < 13; i++) {
             for (var j = 0; j < 4; j++) {
-                this.cards.push(new Card(i, j))
-            }
-        }*/
-        for (var i = 0; i < 12; i++) {
-            for (var j = 0; j < 1; j++) {
                 this.cards.push(new Card_1.Card(i, j));
             }
         }
+        /*for (var i = 0; i < 12; i++) {
+            for (var j = 0; j < 1; j++) {
+                this.cards.push(new Card(i, j))
+            }
+        }*/
     }
     shuffle() {
         for (let i = this.cards.length - 1; i > 0; i--) {
