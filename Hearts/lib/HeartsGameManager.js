@@ -47,13 +47,17 @@ class HeartsGameManager {
     playCard(player, card) {
         var canEndTurn = this.game.playCard(player, card);
         if (canEndTurn) {
-            var victor = this.game.getVictor();
-            this.players.forEach(x => x.roundCompleteUpdate(victor));
-            var canEndGame = this.game.toNextTurn();
-            if (canEndGame) {
-                var scores = this.game.getPlayerScores();
-                this.players.forEach(x => x.gameCompleteUpdate(scores));
-            }
+            setTimeout(() => {
+                var victor = this.game.getVictor();
+                console.log(victor);
+                this.players.forEach(x => x.roundCompleteUpdate(victor));
+                var canEndGame = this.game.toNextTurn();
+                if (canEndGame) {
+                    var scores = this.game.getPlayerScores();
+                    this.players.forEach(x => x.gameCompleteUpdate(scores));
+                }
+                this.broadcastStatus();
+            }, 1500);
         }
         this.broadcastStatus();
     }

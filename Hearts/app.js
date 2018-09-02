@@ -7,7 +7,7 @@ const index_1 = require("./routes/index");
 const debug_1 = require("./routes/debug");
 const HeartsWSServer_1 = require("./lib/HeartsWSServer");
 var app = express();
-var port = parseInt(process.env.PORT) || 3001;
+var port = parseInt(process.env.PORT) || 80;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -43,7 +43,10 @@ app.use((err, req, res, next) => {
 });
 app.set('port', port);
 var HWSS = new HeartsWSServer_1.HeartsWSServer(3030);
-var server = app.listen(app.get('port'), function () {
-    debug('Express server listening on port ' + server.address().port);
-});
+module.exports.app_http = app;
+if (require.main == module) {
+    var server = app.listen(app.get('port'), function () {
+        debug('Express server listening on port ' + server.address().port);
+    });
+}
 //# sourceMappingURL=app.js.map
