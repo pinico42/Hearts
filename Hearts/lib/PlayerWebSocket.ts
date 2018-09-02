@@ -1,23 +1,25 @@
 ﻿import * as WebSocket from 'ws';
 import { PlayerScore } from './HeartsGame';
 import { PlayerStatus } from './PlayerStatus';
-import { HeartsWSServer } from './HeartsWSServer';
+import { HeartsWSServer, WSProperties } from './HeartsWSServer';
 
 export class PlayerWebSocket {
     ws: WebSocket;
     playerNum: number;
+    properties: WSProperties;
 
-    constructor(ws: WebSocket) {
+    constructor(ws: WebSocket, properties: WSProperties) {
         this.ws = ws;
+        this.properties = properties;
     }
 
     setId(id: string) {
-        this.ws.id = id;
+        this.properties.id = id;
     }
 
     setPlayerNum(playerNum: number) {
         this.playerNum = playerNum;
-        this.ws.num = playerNum;
+        this.properties.num = playerNum;
     }
 
     updateStatus(status: PlayerStatus) {

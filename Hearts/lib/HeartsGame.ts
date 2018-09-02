@@ -142,7 +142,7 @@ export class HeartsGame {
             throw new Error("Game must be in stage STAGE_ENDING_GAME");
         }
 
-        var playerPoints: PlayerScore[] = new Array(this.playerNum);
+        var playerPoints: PlayerScore[] = [];
         for (var i = 0; i < this.playerNum; i++) {
             var wca = this.wonCards[i];
             playerPoints.push({

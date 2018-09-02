@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Card_1 = require("./Card");
-var Hand_1 = require("./Hand");
-var Pack = /** @class */ (function () {
-    function Pack() {
+const Card_1 = require("./Card");
+const Hand_1 = require("./Hand");
+class Pack {
+    constructor() {
         this.cards = [];
         /*for (var i = 0; i < 13; i++) {
             for (var j = 0; j < 4; j++) {
@@ -16,14 +16,13 @@ var Pack = /** @class */ (function () {
             }
         }
     }
-    Pack.prototype.shuffle = function () {
-        for (var i = this.cards.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            _a = [this.cards[j], this.cards[i]], this.cards[i] = _a[0], this.cards[j] = _a[1];
+    shuffle() {
+        for (let i = this.cards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
         }
-        var _a;
-    };
-    Pack.prototype.deal = function (players) {
+    }
+    deal(players) {
         var rejects = this.getRejects(players);
         var hands = new Array(players);
         for (var i = 0; i < players; i++) {
@@ -32,14 +31,14 @@ var Pack = /** @class */ (function () {
         var currentPlayer = 0;
         for (var i = 0; i < this.cards.length; i++) {
             var card = this.cards[i];
-            if (rejects.filter(function (x) { return x.matches(card); }).length == 0) {
+            if (rejects.filter(x => x.matches(card)).length == 0) {
                 hands[currentPlayer].push(card);
                 currentPlayer = (currentPlayer + 1) % players;
             }
         }
         return hands;
-    };
-    Pack.prototype.getRejects = function (players) {
+    }
+    getRejects(players) {
         var rejectnum = 52 % players;
         var rejects = [
             Card_1.Card.fromFace("2C"),
@@ -47,17 +46,16 @@ var Pack = /** @class */ (function () {
             Card_1.Card.fromFace("2S")
         ].slice(0, rejectnum);
         return rejects;
-    };
-    return Pack;
-}());
+    }
+}
 exports.Pack = Pack;
 if (require.main === module) {
     var p = new Pack();
     p.shuffle();
     var d = p.deal(5);
     d[0].sort();
-    d.forEach(function (h) {
-        h.cards.forEach(function (c) {
+    d.forEach(h => {
+        h.cards.forEach(c => {
             console.log(c.face);
         });
         console.log(h.cards.length);

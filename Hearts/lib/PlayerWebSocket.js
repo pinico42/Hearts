@@ -1,36 +1,36 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var HeartsWSServer_1 = require("./HeartsWSServer");
-var PlayerWebSocket = /** @class */ (function () {
-    function PlayerWebSocket(ws) {
+const HeartsWSServer_1 = require("./HeartsWSServer");
+class PlayerWebSocket {
+    constructor(ws, properties) {
         this.ws = ws;
+        this.properties = properties;
     }
-    PlayerWebSocket.prototype.setId = function (id) {
-        this.ws.id = id;
-    };
-    PlayerWebSocket.prototype.setPlayerNum = function (playerNum) {
+    setId(id) {
+        this.properties.id = id;
+    }
+    setPlayerNum(playerNum) {
         this.playerNum = playerNum;
-        this.ws.num = playerNum;
-    };
-    PlayerWebSocket.prototype.updateStatus = function (status) {
+        this.properties.num = playerNum;
+    }
+    updateStatus(status) {
         this.ws.send(JSON.stringify({
             type: HeartsWSServer_1.HeartsWSServer.PROTOCOL_BROADCAST_UPDATE,
             status: status
         }));
-    };
-    PlayerWebSocket.prototype.roundCompleteUpdate = function (victor) {
+    }
+    roundCompleteUpdate(victor) {
         this.ws.send(JSON.stringify({
             type: HeartsWSServer_1.HeartsWSServer.PROTOCOL_BROADCAST_ROUNDCOMPLETE,
             victor: victor
         }));
-    };
-    PlayerWebSocket.prototype.gameCompleteUpdate = function (playerScores) {
+    }
+    gameCompleteUpdate(playerScores) {
         this.ws.send(JSON.stringify({
             type: HeartsWSServer_1.HeartsWSServer.PROTOCOL_BROADCAST_GAMECOMPLETE,
             playerScores: playerScores
         }));
-    };
-    return PlayerWebSocket;
-}());
+    }
+}
 exports.PlayerWebSocket = PlayerWebSocket;
 //# sourceMappingURL=PlayerWebSocket.js.map

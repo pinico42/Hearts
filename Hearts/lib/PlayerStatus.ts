@@ -10,4 +10,5 @@ export interface PlayerStatus {
     hand: Card[];
     handSizes: number[];
     table: Card[];
+    stage: number;
 }

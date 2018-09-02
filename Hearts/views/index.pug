@@ -1,11 +1,34 @@
 ﻿extends layout
 
 block content
-  #panel_greet
-    h1 Create new game
-    h1 Join game
+  #panel_greet.panel
+    #controls_box
+        h1#bigcard 🂱
+        h2#newgame.button Create new game
+        h2#joingame.button Join game
+        input#joingameinput.button(placeholder="Join game")
+            
 
-  #panel_awaiting
-  #panel_game
+  #panel_awaiting.panel
+    #controls_box
+        h1 Awaiting game 
+        span#game_id
+        h2#startgame.button Start game
+  #panel_game.panel
+    #owned
+        #owned_cards 
     #table
+        #table_cards 
+        h3#table_yourturn Your turn
+    #handarounds
+        #handaround_cards
+        h3.button#handaround_button Handaround cards
+        h3#handaround_await_message Awaiting further handarounds...
     #hand
+        #hand_cards
+  #panel_scores.panel   
+    table#scoreboard
+        tr
+            th Position
+            th Player
+            th Score

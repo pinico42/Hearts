@@ -23,7 +23,8 @@ export class HeartsGameManager {
             currentPlayer: this.game.currentPlayer,
             hand: hand,
             handSizes: this.game.hands.map(x => x.getSize()),
-            table: this.game.table.cards.map(x => x.card)
+            table: this.game.table.cards.map(x => x.card),
+            stage: this.game.stage
         }
     }
 

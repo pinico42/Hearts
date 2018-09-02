@@ -18,7 +18,7 @@ export class Card {
     }
 
     static fromFace(face: string) {
-        var rank = face[face.length-2];
+        var rank = face[face.length - 2];
         var suit = face[face.length - 1];
         var num = "A234567890JQK".indexOf(rank);
         console.log(num);
@@ -40,8 +40,4 @@ export class Card {
     matches(c: Card) {
         return (c.num == this.num && c.suitn == this.suitn);
     }
-}
-
-if (require.main === module) {
-    console.log(Card.fromFace("QH"));
 }

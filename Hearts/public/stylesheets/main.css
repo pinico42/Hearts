@@ -1,8 +1,135 @@
-﻿body {
-    padding: 50px;
+﻿html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
     color: #00B7FF;
+}
+
+.panel {
+    height: 100%;
+    display: none;
+}
+
+#panel_greet {
+    display: block;
+}
+
+#bigcard {
+    font-size: 10em;
+    font-weight: normal;
+    margin: 0px;
+}
+
+#controls_box {
+    text-align: center;
+    padding-top: 20vh;
+}
+
+.button {
+    text-align: center;
+    border: 2px solid black;
+    padding: 5px;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.button:hover {
+    transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    -moz-transform: scale(1.03);
+}
+
+#joingameinput {
+    display: none;
+    outline: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}
+
+#game_id {
+    font-size: 4em;
+}
+
+#hand {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#hand_cards {
+    font-size: 6em;
+    height: 40%;
+    overflow-y: auto;
+    text-align: center;
+}
+
+#hand_cards span {
+    cursor: pointer;
+}
+
+#table_cards {
+    font-size: 10em;
+    text-align: center;
+}
+
+#table {
+    padding-top: 10vh;
+}
+
+#handaround_cards {
+    font-size: 10em;
+    text-align: center;
+}
+
+#handarounds {
+    padding-top: 10vh;
+    text-align: center;
+}
+
+#handaround_cards span {
+    cursor: pointer;
+}
+
+#handaround_button {
+    display: none;
+}
+
+#handaround_await_message {
+    display: none;
+}
+
+h3 {
+    text-align: center;
+}
+#owned {
+    padding: 20px;
+}
+#owned_cards {
+    font-size: 3em;
+}
+
+tr.won {
+    background-color: black;
+    color: white;
+}
+
+table {
+    margin: auto;
+    padding-top: 20%;
+    font-size: 2em;
+}
+
+td, th {
+    padding: 5px;
 }

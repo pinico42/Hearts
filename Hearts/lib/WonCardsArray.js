@@ -1,23 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var WonCardsArray = /** @class */ (function () {
-    function WonCardsArray() {
+class WonCardsArray {
+    constructor() {
         this.cards = [];
     }
-    WonCardsArray.prototype.add = function (card) {
+    add(card) {
         this.cards.push(card);
-    };
-    WonCardsArray.prototype.addMany = function (newCards) {
+    }
+    addMany(newCards) {
         this.cards = this.cards.concat(newCards);
-    };
-    WonCardsArray.prototype.calcScore = function () {
+    }
+    calcScore() {
         var score = 0;
-        this.cards.forEach(function (c) {
+        this.cards.forEach((c) => {
             score += c.getPoints();
         });
         return score;
-    };
-    return WonCardsArray;
-}());
+    }
+}
 exports.WonCardsArray = WonCardsArray;
 //# sourceMappingURL=WonCardsArray.js.map

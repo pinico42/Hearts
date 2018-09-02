@@ -4,6 +4,11 @@ import { HeartsGameManager } from './HeartsGameManager';
 import { PlayerWebSocket } from './PlayerWebSocket';
 import { Card } from './Card';
 
+export interface WSProperties {
+    id: string,
+    num: number
+}
+
 export class HeartsWSServer {
 
     static PROTOCOL_NEWGAME = 0;
@@ -41,12 +46,13 @@ export class HeartsWSServer {
 
     onConnect(ws: WebSocket) {
         console.log("New connection");
+        var properties: WSProperties = { id: null, num: null };
         ws.on('message', msg => {
-            this.onMessage.bind(this)(ws, msg)
+            this.onMessage.bind(this)(ws, msg, properties)
         });
     }
 
-    onMessage(ws: WebSocket, msg: string) {
+    onMessage(ws: WebSocket, msg: string, properties: WSProperties) {
         try {
             var json = JSON.parse(msg);
         } catch (e) {
@@ -61,8 +67,10 @@ export class HeartsWSServer {
                 case HeartsWSServer.PROTOCOL_NEWGAME:
                     var id = this.genId();
                     this.games[id] = new HeartsGameManager();
-                    var pws = new PlayerWebSocket(ws);
+                    var pws = new PlayerWebSocket(ws, properties);
                     pws.setId(id);
+                    console.log(properties);
+                    console.log(pws);
                     var num = this.games[id].addPlayer(pws);
                     ws.send(JSON.stringify({
                         type: HeartsWSServer.PROTOCOL_NEWGAME,
@@ -80,7 +88,7 @@ export class HeartsWSServer {
                         }));
                         break;
                     }
-                    var pws = new PlayerWebSocket(ws);
+                    var pws = new PlayerWebSocket(ws, properties);
                     pws.setId(id);
                     var num = game.addPlayer(pws);
                     ws.send(JSON.stringify({
@@ -91,7 +99,7 @@ export class HeartsWSServer {
                     }));
                     break;
                 case HeartsWSServer.PROTOCOL_STARTGAME:
-                    var id: string = ws.id;
+                    var id: string = properties.id;
                     this.games[id].startGame();
                     ws.send(JSON.stringify({
                         type: HeartsWSServer.PROTOCOL_STARTGAME,
@@ -99,11 +107,9 @@ export class HeartsWSServer {
                     }));
                     break;
                 case HeartsWSServer.PROTOCOL_SETHANDAROUND:
-                    var id: string = ws.id;
-                    var num: number = ws.num;
+                    var id: string = properties.id;
+                    var num: number = properties.num;
                     var handaround = json.cards.map(x => new Card(x.num, x.suitn));
-                    console.log(handaround);
-                    console.log(num);
                     this.games[id].setHandaround(num, handaround);
                     ws.send(JSON.stringify({
                         type: HeartsWSServer.PROTOCOL_SETHANDAROUND,
@@ -111,8 +117,8 @@ export class HeartsWSServer {
                     }));
                     break;
                 case HeartsWSServer.PROTOCOL_PLAYCARD:
-                    var id: string = ws.id;
-                    var num: number = ws.num;
+                    var id: string = properties.id;
+                    var num: number = properties.num;
                     this.games[id].playCard(num, new Card(json.card.num, json.card.suitn));
                     ws.send(JSON.stringify({
                         type: HeartsWSServer.PROTOCOL_PLAYCARD,
@@ -120,9 +126,8 @@ export class HeartsWSServer {
                     }));
                     break;
                 case HeartsWSServer.PROTOCOL_INDIVIDUAL_UPDATE:
-                    var id: string = ws.id;
-                    var num: number = ws.num;
-                    console.log(id);
+                    var id: string = properties.id;
+                    var num: number = properties.num;
                     var status = this.games[id].getStatus(num);
                     ws.send(JSON.stringify({
                         type: HeartsWSServer.PROTOCOL_INDIVIDUAL_UPDATE,
