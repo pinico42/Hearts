@@ -7,7 +7,7 @@ import debugPage from './routes/debug';
 import { HeartsWSServer } from './lib/HeartsWSServer';
 
 var app = express();
-var port = parseInt(process.env.PORT) || 3001;
+var port = parseInt(process.env.PORT) || 80;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,6 +52,10 @@ app.use((err: any, req, res, next) => {
 app.set('port', port);
 var HWSS = new HeartsWSServer(3030);
 
-var server = app.listen(app.get('port'), function () {
-    debug('Express server listening on port ' + server.address().port);
-});
+module.exports.app_http = app;
+
+if (require.main == module) {
+    var server = app.listen(app.get('port'), function () {
+        debug('Express server listening on port ' + server.address().port);
+    });
+}
